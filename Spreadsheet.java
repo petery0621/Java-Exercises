@@ -16,6 +16,12 @@ public class Spreadsheet {
 	private char yaxis = 'A';
 	private int xaxis = 1;
 
+	// for testing purpose
+	public static void main(String[] args){
+		
+	
+	}
+
 	//	Spreadsheet constructor
 	public Spreadsheet()
 	{
@@ -33,16 +39,26 @@ public class Spreadsheet {
 	//	Method processes the command from command
 	public void processCommand(String input)
 	{
-		//		Redefine value of both to reset
+		try{
+			double realValue = Double.parseDouble(input);
+		}catch (NumberFormatException e){			
+			
+		}
+		
+		
+		
+		//Redefine value of both to reset
 		yaxis = 'A';
 		xaxis = 1;
 
-		//		Tokens the input
+		// Tokens the input
 		String[] inputSplit = input.split(" ");		
-
-		//		If the input is a single token
-		if(inputSplit.length == 1)
-		{
+		
+		// If the input is a single token
+		if(inputSplit.length == 1){
+			//"#@!SAFA"
+			//"B1", "print", "exit"
+			
 			if(input.equalsIgnoreCase("print")){
 				String[][] table = getGridText();
 				String decoration = decoration();
@@ -52,14 +68,16 @@ public class Spreadsheet {
 					}
 					System.out.println(decoration);
 				}
-			}
-			else{
+			}else{
 				SpreadsheetLocation loc = new SpreadsheetLocation(input);
 				System.out.print(cells[loc.getRow()][loc.getCol()].abbreviatedCellText());
 			}
-		}
-		else
-		{
+		}else{
+			// debugging
+			for (int i=0; i<inputSplit.length;i++){
+				System.out.println(inputSplit[i]);
+			}
+			
 			assignValueToCell(inputSplit[0], inputSplit[2]);			
 		}
 	}
@@ -72,12 +90,15 @@ public class Spreadsheet {
 	//	Assign value to the cell
 	private void assignValueToCell(String cell, String value)
 	{
+		System.out.println(cell);
 		SpreadsheetLocation loc = new SpreadsheetLocation(cell);
 		Cell c = null;
 		if(value.contains("\""))
 		{
 			c = new ValueCell(value);
 		}
+		System.out.println("getRow:" + (loc.getRow()-1));
+		System.out.println("getCol:" + (loc.getCol()-1));
 		cells[loc.getRow()-1][loc.getCol()-1] = c;
 	}
 
