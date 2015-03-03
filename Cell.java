@@ -22,7 +22,8 @@ abstract class Cell {
 	{
 		this.value = newValue;
 	}
-
+	// fullCellText() must return "<empty>" 
+	// Isn't it a string, "<empty>"? 
 	public String fullCellText()
 	{
 		String empty = "";
@@ -48,12 +49,9 @@ abstract class Cell {
 		{
 			out = out + " ";
 		}
-		if (newInput.length() > 12)
-		{
+		if (newInput.length() > 12){
 			out = newInput.substring(0, 10) + ">";
-		}
-		else
-		{
+		}else{
 			out = out + newInput;
 		}
 		int numSpaces = sheet.COL_WIDTH - out.length();
