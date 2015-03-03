@@ -14,12 +14,17 @@ public class SpreadsheetLocation {
 	{
 		int letter1 = (int) location.charAt(0);
 		int letter0 = (int) 'A';
-		int number1 = (int) location.charAt(1);
-		int number0 = (int) '1';
+		char number1 =  location.charAt(1);
+		char number0 =  '1';		
 		
+		System.out.println("number1: "+ number1);
+		System.out.println("number0: " + number0);
 		
 		row = number1 - number0;
 		col = letter1 - letter0;
+		
+		System.out.println("row: " + row );
+		System.out.println("col: " + col );
 	}
 	
 	public int getRow()
