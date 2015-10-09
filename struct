@@ -5,95 +5,98 @@ using System.Text;
 
 namespace NumberTest
 {
-	/// <summary>
-	/// Represents a complex number
-	/// </summary>
-	struct Complex
-	{
-		/// <summary>
-		/// Represents the real part of a complex number
-		/// </summary>
-		public double Real { get; set; }
-		/// <summary>
-		/// Represents the imaginary part of a complex number
-		/// </summary>
-		public double Imaginary { get; set; }
+    /// <summary>
+    /// Represents a complex number
+    /// </summary>
+    struct Complex
+    {
+        /// <summary>
+        /// Represents the real part of a complex number
+        /// </summary>
+        public double Real { get; set; }
+        /// <summary>
+        /// Represents the imaginary part of a complex number
+        /// </summary>
+        public double Imaginary{ get; set; }
 
-		public Complex(double real, double imaginary)
-			: this()
-		{
-			Real = real;
-			Imaginary = imaginary;
-		}
+        public Complex(double real, double imaginary)
+            : this()
+        {
+            Real = real;
+            Imaginary = imaginary;
+        }
+        #region operators
 
-		#region operators
-		public static Complex operator +(Complex lhs, Complex rhs)
-		{
-			return new Complex(lhs.Real + rhs.Real, lhs.Imaginary + rhs.Imaginary);
-		}
-		public static Complex operator -(Complex lhs, Complex rhs)
-		{
-			return new Complex(lhs.Real - rhs.Real, lhs.Imaginary - rhs.Imaginary);
-		}
-		public static Complex operator -(Complex rhs)
-		{
-			return new Complex(-rhs.Real, -rhs.Imaginary);
-		}
+        public static Complex operator +(Complex lhs, Complex rhs)
+        {
+            return new Complex(lhs.Real + rhs.Real, lhs.Imaginary + rhs.Imaginary);
+        }
+        public static Complex operator -(Complex lhs, Complex rhs)
+        {
+            return new Complex(lhs.Real - rhs.Real, lhs.Imaginary - rhs.Imaginary);
+        }
+        public static Complex operator -(Complex rhs)
+        {
+            return new Complex(-rhs.Real, -rhs.Imaginary);
+        }
 
-		public static Complex operator *(Complex lhs, Complex rhs)
-		{
-			return new Complex(
-				lhs.Real * rhs.Real - lhs.Imaginary * rhs.Imaginary,
-				lhs.Real * rhs.Imaginary + rhs.Real * rhs.Imaginary);
-		}
+        public static Complex operator *(Complex lhs, Complex rhs)
+        {
+            return new Complex(
+                lhs.Real * rhs.Real - lhs.Imaginary * rhs.Imaginary, 
+                lhs.Real * rhs.Imaginary + rhs.Real * rhs.Imaginary);
+        }
 
-		public static Complex operator /(Complex lhs, Complex rhs)
-		{
-			double div = rhs.Real * rhs.Real + rhs.Imaginary * rhs.Imaginary;
-			return new Complex(
-				(lhs.Real * rhs.Real + lhs.Imaginary * rhs.Imaginary) / div,
-				(lhs.Imaginary * rhs.Real - lhs.Real * rhs.Imaginary) / div
-				);
-		}
+        public static Complex operator /(Complex lhs, Complex rhs)
+        {
+            double div = rhs.Real * rhs.Real + rhs.Imaginary * rhs.Imaginary;
+            return new Complex(
+                (lhs.Real * rhs.Real + lhs.Imaginary * rhs.Imaginary)/div,
+                (lhs.Imaginary * rhs.Real - lhs.Real * rhs.Imaginary)/div
+                );
+        }
 
-		public static Complex operator ==(Complex lhs, Complex rhs)
-		{
-			return (lhs.Real == rhs.Real) && (lhs.Imaginary == rhs.Imaginary);
-		}
-		public static bool operator !=(Complex lhs, Complex rhs)
-		{
-			return !(lhs == rhs);
-		}
+        public static bool operator ==(Complex lhs, Complex rhs)
+        {
+            return (lhs.Real == rhs.Real) && (lhs.Imaginary == rhs.Imaginary);
+        }
+        public static bool operator !=(Complex lhs, Complex rhs)
+        {
+            return !(lhs == rhs);
+        }
 
-		public static implicit operator Complex(double d)
-		{
-			return new Complex(d, 0);
-		}
+        public static implicit operator Complex(double d)
+        {
+            return new Complex(d, 0);
+        }
 
-		public static explicit operator double(Complex c)
-		{
-			return Math.Sqrt(c.Real * c.Real + c.Imaginary * c.Imaginary);
-		}
-		#endregion
+        public static explicit operator double(Complex c)
+        {
+            return Math.Sqrt(c.Real * c.Real + c.Imaginary * c.Imaginary);
+        }
+
+        #endregion
 
 
-		#region override object methods
-		public override string ToString()
-		{
-			return String.Format("{0:0.00} + {1:0.00}i", Real, Imaginary);
-		}
+        #region override object methods
+        public override string ToString()
+        {
+            return String.Format("{0:0.00} + {1:0.00}i", Real, Imaginary);
+        }
 
-		public override bool Equals(object obj)
-		{
-			Complex? c = obj as Complex?; //Safely cast to Complex
-			if (c == null) { return false; }
-			return (this.Real == c.Value.Real) && (this.Imaginary == c.Value.Imaginary);
-		}
+        public override bool Equals(object obj)
+        {
+            Complex? c = obj as Complex?; //Safely cast to Complex
+            if (c == null) { return false; }
+            return (this.Real == c.Value.Real) && (this.Imaginary == c.Value.Imaginary);
+        }
 
-		public override int GetHashCode()
-		{
-			return ((double)this).GetHashCode();
-		}
-		#endregion
-	}
+        public override int GetHashCode()
+        {
+            return ((double)this).GetHashCode();
+        }
+        #endregion
+
+
+    }
 }
